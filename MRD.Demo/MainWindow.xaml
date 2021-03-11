@@ -4,9 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MRD.Demo"
+        xmlns:mrd="clr-namespace:MRD.UserRoleSeparationHelper;assembly=MRD.UserRoleSeparationHelper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="300" Width="419">
+    <StackPanel>
+        <TextBlock Text="CONTENT NÀY HIỂN THỊ KHÔNG CẦN QUYỀN"/>
+        <TextBlock Text="==> User có quyền cao hơn nhìn thấy mọi UI của user có quyền thấp hơn!"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button Width="110" Height="100" Background="Green" Margin="6" 
+                        Content="ADMIN CONTENT"
+                        mrd:PermissionBehavior.LoggedInUserType="{Binding LoggedInUserType, Mode=TwoWay}"
+                        mrd:PermissionBehavior.RequiredUserType="Admin"/>
+            <Button Width="110" Height="100" Background="Yellow" Margin="6" 
+                        Content="MANAGER CONTENT" 
+                        mrd:PermissionBehavior.LoggedInUserType="{Binding LoggedInUserType, Mode=TwoWay}"
+                        mrd:PermissionBehavior.RequiredUserType="Manager"/>
+            <Button Width="110" Height="100" Background="Red" Foreground="White" Margin="6" 
+                        Content="Loggin UI" 
+                        mrd:PermissionBehavior.LoggedInUserType="{Binding LoggedInUserType, Mode=TwoWay}"
+                        mrd:PermissionBehavior.RequiredUserType="Guest"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Login As Admin" HorizontalAlignment="Left" Width="100" Height="30" Click="LoginAsAdmin"
+                    mrd:PermissionBehavior.LoggedInUserType="{Binding LoggedInUserType, Mode=TwoWay}"
+                    mrd:PermissionBehavior.RequiredUserType="Guest"/>
+            <TextBlock Text=" "/>
+            <Button Content="Logout" HorizontalAlignment="Left" Width="100" Height="30" Click="LoggOut"
+                    mrd:PermissionBehavior.LoggedInUserType="{Binding LoggedInUserType, Mode=TwoWay}"
+                    mrd:PermissionBehavior.RequiredUserType="User"/>
+        </StackPanel>
 
-    </Grid>
+    </StackPanel>
 </Window>
